@@ -15,7 +15,7 @@ var defaults = {
     paramType: "version",
     suffix: ["css", "js"],
     assignSymbols: ["="],
-    excludeFilenames: [],
+    excludeLinks: [],
     onlyOutChanged: true,
     largeSize: 200,
     autoSkipLargeFile: false,
@@ -149,8 +149,9 @@ function gulpVersion(options) {
             param,
             $7
         ) {
-            for (var i = 0; i < opts.excludeFilenames.length; ++i) {
-                if (path.endsWith(opts.excludeFilenames[i])) {
+            for (var i = 0; i < opts.excludeLinks.length; ++i) {
+                if (path.endsWith(opts.excludeLinks[i])) {
+                    process.stdout.write(`[${opts.excludeLinks[i]}] `)
                     process.stdout.write(
                         `\x1B[34m[eclude link:${match}] \x1B[0m`
                     );
@@ -187,8 +188,8 @@ function gulpVersion(options) {
             param,
             $7
         ) {
-            for (var i = 0; i < opts.excludeFilenames.length; ++i) {
-                if (path.endsWith(opts.excludeFilenames[i])) {
+            for (var i = 0; i < opts.excludeLinks.length; ++i) {
+                if (path.endsWith(opts.excludeLinks[i])) {
                     console.log(`\x1B[34m[eclude link:${match}] \x1B[0m`);
                     return match;
                 }
@@ -214,27 +215,37 @@ function gulpVersion(options) {
         contents = contents.replace(regex3, function (
             match,
             $1,
-            $2,
-            $3,
-            $4,
-            $5
+            left,
+            mid,
+            path,
+            suffix,
+            suffixRight,
+            param,
+            $7
         ) {
+            for (var i = 0; i < opts.excludeLinks.length; ++i) {
+                if (path.endsWith(opts.excludeLinks[i])) {
+                    console.log(`\x1B[34m[eclude link:${match}] \x1B[0m`);
+                    return match;
+                }
+            }
+
             matched = true;
             var version;
             // append parameter
-            if ($3 != undefined) {
+            if (param != undefined) {
                 if (opts.mode == "replace") {
                     // replace version
                     version = "?" + opts.paramName + "=" + opts.version;
                 } else {
                     // append version
                     version =
-                        "?" + opts.paramName + "=" + opts.version + "&" + $4;
+                        "?" + opts.paramName + "=" + opts.version + "&" + param;
                 }
             } else {
                 version = "?" + opts.paramName + "=" + opts.version;
             }
-            return $1 + $2 + version + $5;
+            return $1 + version + $7;
         });
         if ((opts.onlyOutChanged && matched) || !opts.onlyOutChanged) {
             file.contents = Buffer.from(contents);
