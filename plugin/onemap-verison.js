@@ -7,7 +7,7 @@ var addSeajsConfigMap = require("./seajs-config-version.js");
 var minimatch = require("minimatch");
 
 // plugin name
-const PLUGIN_NAME = "gulp-html-version";
+const PLUGIN_NAME = "gulp-version-num";
 
 // default parameter
 var defaults = {
