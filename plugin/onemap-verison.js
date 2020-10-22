@@ -127,7 +127,7 @@ function gulpVersion(options) {
         if (file.stat.size / 1000 > opts.largeSize) {
             process.stdout.write("\x1B[31m[large file] \x1B[0m");
             if (opts.autoSkipLargeFile) {
-                process.stdout.write("\x1B[31m[skip] \x1B[0m\n");
+                process.stdout.write("\x1B[31m[skiped] \x1B[0m\n");
                 if (!opts.onlyOutChanged) {
                     this.push(file);
                 }
@@ -151,7 +151,6 @@ function gulpVersion(options) {
         ) {
             for (var i = 0; i < opts.excludeLinks.length; ++i) {
                 if (path.endsWith(opts.excludeLinks[i])) {
-                    process.stdout.write(`[${opts.excludeLinks[i]}] `)
                     process.stdout.write(
                         `\x1B[34m[eclude link:${match}] \x1B[0m`
                     );
