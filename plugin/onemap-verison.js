@@ -21,27 +21,7 @@ var defaults = {
     autoSkipLargeFile: false,
     mode: "replace", // 'replace: replace version from the old version; append: append version information after the old version using &'
 };
-function Stack() {
-    this.item = [];
-    this.push = function (element) {
-        this.items.push(element);
-    };
-    this.pop = function () {
-        return this.items.pop();
-    };
-    this.pop = function () {
-        return this.items[this.items.length - 1];
-    };
-    this.isEmpty = function () {
-        return !this.items.length;
-    };
-    this.clear = function () {
-        this.items = [];
-    };
-    this.size = function () {
-        return this.items.length;
-    };
-}
+
 /**
  * Short unique id generator
  */
