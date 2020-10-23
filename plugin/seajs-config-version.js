@@ -42,8 +42,8 @@ function addSeajsConfigMap(contents, opts) {
             let configString = backContent.substring(0, i);
             var exclude = JSON.stringify(opts.excludeLinks);
             contents +=
-                `var _config_=${configString},_config_=jQuery.extend(!0,_config_,{map:[function(f){var n=${exclude};if(new RegExp("(.+\\\\.(js|css|html))(\\\\?.*)*$","ig").test(f)){for(var s,i=RegExp.$1,e=0;e<n.length;++e)if(""!=n[e].trim()&&i.endsWith(n[e]))return f;-1!=f.indexOf("?")?(s=f.substring(f.indexOf("?")+1)).includes("${opts.paramName}=${opts.version}")||(f=f.substring(0,f.indexOf("?")+1)+"${opts.paramName}=${opts.version}&"+s):f+="?${opts.paramName}=${opts.version}"}return f}]});seajs.config(_config_);`
-                +addSeajsConfigMap(backContent.substring(i + 1), opts);
+            `var _$config_=${configString};function _$configMapFun(f){var n=${exclude};if(new RegExp("(.+\\\\.(js|css|html))(\\\\?.*)*$","ig").test(f)){for(var i,s=RegExp.$1,_=0;_<n.length;++_)if(""!=n[_].trim()&&s.endsWith(n[_]))return f;-1!=f.indexOf("?")?(i=f.substring(f.indexOf("?")+1)).includes("${opts.paramName}=${opts.version}")||(f=f.substring(0,f.indexOf("?")+1)+"${opts.paramName}=${opts.version}&"+i):f+="?${opts.paramName}=${opts.version}"}return f}_$config_.map?_$config_.map.push(_$configMapFun):_$config_.map=[_$configMapFun],seajs.config(_$config_);`
+               +addSeajsConfigMap(backContent.substring(i + 1), opts);
         } else {
             console.error("[seajs.config 括号不匹配]");
         }
