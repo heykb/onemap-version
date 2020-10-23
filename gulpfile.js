@@ -22,9 +22,9 @@ var config = {
         "!**/_nuxt/commons/**/*",
     ],
     // 是否zip包输出
-    outZipEnable: false,
+    outZipEnable: true,
     // 极简模式，true: 只输出srcPattern匹配的文件
-    outAllRepDisable: true,
+    outAllRepDisable: false,
 };
 var options = {
     //参数名称

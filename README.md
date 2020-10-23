@@ -1,9 +1,8 @@
 # onemap-version
   onemap版本控制
-
+## 安装依赖
   1. ```npm install```
-  2. 修改gulpfile.js
-   
+## 修改项目配置 gulpfile.js
 ```js
 var config = {
   // 项目根路径
@@ -40,5 +39,5 @@ var options = {
   autoSkipLargeFile:false
 }
 ```
-  3. 运行 ```gulp``` 如以下输出:
+## 运行 ```gulp``` 
 ![avatar](./images/readme1.png)
