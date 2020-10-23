@@ -44,7 +44,7 @@ var options = {
     // 大文件提示 单位：kb
     largeSize: 300,
     // 自动跳过大文件
-    autoSkipLargeFile: true,
+    autoSkipLargeFile: false,
 };
 
 function log(message) {
@@ -66,7 +66,7 @@ gulp.task("transform", function () {
             .src(config.srcPattern)
             .pipe(
                 gulpif(
-                    ["**/seajsInit.js", "**/initPortal.js"],
+                    ["**/seajsInit.js", "**/initPortal.js","**/manage.html"],
                     gulpVersion.seajsVersion(options)
                 )
             )
@@ -80,7 +80,7 @@ gulp.task("transform", function () {
             .src(config.srcRoot + "/**/*")
             .pipe(
                 gulpif(
-                    ["**/seajsInit.js", "**/initPortal.js"],
+                    ["**/seajsInit.js", "**/initPortal.js","**/manage.html"],
                     gulpVersion.seajsVersion(options)
                 )
             )

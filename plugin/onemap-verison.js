@@ -75,8 +75,8 @@ function gulpVersion(options) {
     );
     var regex3 = new RegExp(
         "(([\\w-\"']+)[\\s]*([" +
-        assignSymbols.join("|") +
-        "]){1}[\\s]*`(.+?(\\.css|js|html)))(\\?([^&\"']+(?:&[^&\"']+)*))?(`)",
+            assignSymbols.join("|") +
+            "]){1}[\\s]*`(.+?(\\.css|js|html)))(\\?([^&\"']+(?:&[^&\"']+)*))?(`)",
         "ig"
     );
     // bootstrap-material-design.min.css
@@ -272,9 +272,30 @@ function seajsVersion(options) {
             );
             return cb();
         }
-
         var contents = file.contents.toString();
-        contents = addSeajsConfigMap(contents, opts);
+        var regex = new RegExp(
+            "(<script\\b[^>]*>)([\\s\\S]*?)(<\\/script>)",
+            "ig"
+        );
+        if (file.path.endsWith(".html") || file.path.endsWith(".htm")) {
+            contents = contents.replace(regex, function (
+                match,
+                left,
+                script,
+                right
+            ) {
+                if (script.trim() == "") {
+                    return match;
+                } else {
+                    var newScript = addSeajsConfigMap(script, opts);
+                    console.log(newScript);
+                    return left + newScript + right;
+                }
+            });
+        }
+        if (file.path.endsWith(".js")) {
+            contents = addSeajsConfigMap(contents, opts);
+        }
         file.contents = Buffer.from(contents);
         this.push(file);
 
