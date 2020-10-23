@@ -1,4 +1,5 @@
 var uglifyJS = require("uglify-js");
+
 function Stack() {
     this.items = [];
     this.push = function (element) {
@@ -20,6 +21,9 @@ function Stack() {
         return this.items.length;
     };
 }
+
+
+
 function addSeajsConfigMap(contents, opts) {
     var index = contents.indexOf("seajs.config(");
     if (index != -1) {

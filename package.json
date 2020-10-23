@@ -1,16 +1,20 @@
 {
   "version": "1.0.0",
   "devDependencies": {
+    "@babel/generator": "^7.12.1",
+    "@babel/parser": "^7.12.3",
+    "@babel/traverse": "^7.12.1",
+    "@babel/types": "^7.12.1",
     "fs": "^0.0.1-security",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
+    "gulp-if": "^3.0.0",
     "gulp-ignore": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8",
     "gulp-zip": "^5.0.2",
     "minimatch": "^3.0.4",
     "object-assign": "^4.1.1",
-    "uglify-js": "^3.11.3",
-    "gulp-if": "^3.0.0"
+    "uglify-js": "^3.11.3"
   }
 }

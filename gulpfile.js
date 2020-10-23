@@ -9,8 +9,8 @@ var gulpIgnore = require("gulp-ignore");
 var config = {
     // 项目根路径
     // srcRoot: 'test/',
-    // // 输出路径
-    // outRoot: "dist/",
+    // // // 输出路径
+    // outRoot: "dist2/",
     outRoot:"E:\\notes\\notes\\software\\apache-tomcat-8.5.57\\webapps\\space\\WEB-INF\\classes\\",
     srcRoot: "E:/notes/work/antu/onemapV5.0/",
     // 匹配符

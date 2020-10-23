@@ -3,7 +3,7 @@ var through = require("through2");
 var assign = require("object-assign");
 var gutil = require("gulp-util");
 var pkg = require(process.cwd() + "/package.json");
-var addSeajsConfigMap = require("./seajs-config-version.js");
+var addSeajsConfigMap = require("./seajs-version.js");
 var minimatch = require("minimatch");
 
 // plugin name
@@ -63,31 +63,29 @@ function gulpVersion(options) {
     var regex = new RegExp(
         "(([\\w-\"']+)[\\s]*([" +
             assignSymbols.join("|") +
-            ']){1}[\\s]*"(.+(\\.css|js|html)))(\\?([^&"\']+(?:&[^&"\']+)*))?(")',
+            ']){1}[\\s]*"(.+?(\\.css|js|html)))(\\?([^&"\']+(?:&[^&"\']+)*))?(")',
         "ig"
     );
     // 单引号 fix:if user use single quotes for quote js css file,only use regex above may cause wrong regex
     var regex2 = new RegExp(
         "(([\\w-\"']+)[\\s]*([" +
             assignSymbols.join("|") +
-            "]){1}[\\s]*'(.+(\\.css|js|html)))(\\?([^&\"']+(?:&[^&\"']+)*))?(')",
+            "]){1}[\\s]*'(.+?(\\.css|js|html)))(\\?([^&\"']+(?:&[^&\"']+)*))?(')",
         "ig"
     );
     var regex3 = new RegExp(
-        "([\\w-\"'`]+[\\s]*[" +
-            assignSymbols.join("|") +
-            "]{1}\\s*`.+)(\\." +
-            opts.suffix.join("|") +
-            ")(\\?([^&\"'`]+(?:&[^&\"'`]+)*))?(`)",
+        "(([\\w-\"']+)[\\s]*([" +
+        assignSymbols.join("|") +
+        "]){1}[\\s]*`(.+?(\\.css|js|html)))(\\?([^&\"']+(?:&[^&\"']+)*))?(`)",
         "ig"
     );
     // bootstrap-material-design.min.css
     console.log(
-        "([\\w-\"']+[\\s]*[" +
+        "([\\w-\"'`]+[\\s]*[" +
             assignSymbols.join("|") +
-            ']{1}\\s*".+)(\\.' +
+            "]{1}\\s*`.+)(\\." +
             opts.suffix.join("|") +
-            ')(\\?([^&"\']+(?:&[^&"\']+)*))?(")'
+            ")(\\?([^&\"'`]+(?:&[^&\"'`]+)*))?(`)"
     );
     var stream = through.obj(function (file, enc, cb) {
         if (file.isNull()) {
@@ -235,7 +233,7 @@ function gulpVersion(options) {
                 console.log("\x1B[33m[not changed but out] \x1B[0m");
             }
         } else {
-            console.log(`\x1B[33m[not changed] \x1B[0m`);
+            console.log("\x1B[33m[not changed] \x1B[0m");
         }
         return cb();
     });
