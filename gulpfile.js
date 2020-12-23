@@ -24,7 +24,7 @@ var config = {
     // 是否zip包输出
     outZipEnable: true,
     // 极简模式，true: 只输出srcPattern匹配的文件
-    outAllRepDisable: false,
+    outAllRepDisable: true,
 };
 var options = {
     //参数名称
